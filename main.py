@@ -4,7 +4,8 @@ import math
 from gaze_tracking import GazeTracking
 
 gaze = GazeTracking()
-faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faceCascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
 
 # saved facial landmark detection model's name as LBFmodel
 LBFmodel = "lbfmodel.yaml"
@@ -137,7 +138,11 @@ while True:
         cv2.putText(img, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
         roi_gray = gray[y:y+h, x:x+w]
         roi_color = img[y:y+h, x:x+w]
-    cv2.imshow('Webcam Feed',img)
+    if img is None:
+        print("Image frame is None — skipping this frame")
+    continue
+    cv2.imshow('Webcam Feed', img)
+
     k = cv2.waitKey(30) & 0xff  # press 'ESC' to quit
     if k == 27:
         break
