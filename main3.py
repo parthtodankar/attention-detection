@@ -9,14 +9,17 @@ import pandas as pd
 from datetime import datetime, timedelta
 import plotly.graph_objects as go
 import plotly.express as px
+from gaze_tracking.gaze_tracking import GazeTracking
+
 
 # Try to import gaze_tracking, handle if not available
 try:
-    from gaze_tracking import GazeTracking
+    from gaze_tracking.gaze_tracking import GazeTracking
     GAZE_TRACKING_AVAILABLE = True
 except ImportError:
     GAZE_TRACKING_AVAILABLE = False
-    st.warning("⚠️ gaze_tracking library not found. Install with: pip install gaze-tracking")
+    st.warning("⚠️ gaze_tracking module not found. Make sure the local folder exists.")
+
 
 # Page configuration
 st.set_page_config(
